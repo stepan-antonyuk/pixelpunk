@@ -1,4 +1,5 @@
 import pygame
+import os
 from world import *
 from hero import *
 
@@ -15,6 +16,16 @@ world = World(surface_altitudes=[
     (200, 260), (500, 360), (700, 460), (800, 360), (900, 260), (1000, 360), (1200, 100), (1250, 280), (1500, 360), (2000, -10000)
 ], bounce=0.2)
 hero = Hero(world=world, x=240, y=240, velocity = HOR_SPEED)
+
+_image_library = {}
+def get_image(path):
+        global _image_library
+        image = _image_library.get(path)
+        if image == None:
+                canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+                image = pygame.image.load(canonicalized_path)
+                _image_library[path] = image
+        return image
 
 while not done:
     for event in pygame.event.get():
