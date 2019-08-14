@@ -17,6 +17,11 @@ world = World(surface_altitudes=[
 ], bounce=0.2)
 hero = Hero(world=world, x=240, y=240, velocity = HOR_SPEED)
 
+imagesL = ['Detective-main-left.png']
+imagesR = ['Detective-main-right.png']
+counterL = 0
+counterR = 0
+
 _image_library = {}
 def get_image(path):
         global _image_library
@@ -34,15 +39,24 @@ while not done:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
 
+    screen.fill((255, 255, 255))
+
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_LEFT]:
         hero.move_left()
+        player = screen.blit(get_image(imagesL[counterL]), (x, y, 240, 240))
+        counterL = (counterL + 1) % len(imagesL)
+        counterR = 0
     if pressed[pygame.K_RIGHT]:
         hero.move_right()
+        player = screen.blit(get_image(imagesR[counterR]), (x, y, 240, 240))
+        counterR = (counterR + 1) % len(imagesR)
+        counterL = 0
+    # else:
+    #     player = screen.blit(get_image(imagesR[counterR]), (x, y, 240, 240))
 
-    screen.fill((0, 0, 0))
 
-    pygame.draw.rect(screen, color ,pygame.Rect(x, y, 240, 240))
+    # pygame.draw.rect(screen, color ,pygame.Rect(x, y, 240, 240))
 
     pygame.display.flip()
     clock.tick(FPS)
