@@ -1,6 +1,6 @@
 class Hero:
 
-    def __init__(self, world, x, y, speed = 0, velocity = 0):
+    def __init__(self, world, x, y, speed=0, velocity=0):
         self.world = world
         self.x = x
         self.y = y
@@ -10,8 +10,10 @@ class Hero:
         # self.alt = self.world.surface_altitude
         # self.limit = self.world.surface_altitude
         self.xxx = 0
+
     def move_left(self):
         self.x -= self.speed
+
     def move_right(self):
         self.x += self.speed
 

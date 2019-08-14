@@ -11,9 +11,11 @@ pygame.init()
 screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 done = False
 world = World(surface_altitudes=[
-    (200, 260), (500, 360), (700, 460), (800, 360), (900, 260), (1000, 360), (1200, 100), (1250, 280), (1500, 360), (2000, -10000)
+    (200, 260), (500, 360), (700, 460),
+    (800, 360), (900, 260), (1000, 360),
+    (1200, 100), (1250, 280), (1500, 360), (2000, -10000)
 ], bounce=0.2)
-hero = Hero(world=world, x=240, y=240, speed=5, velocity = HOR_SPEED)
+hero = Hero(world=world, x=240, y=240, speed=5, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
@@ -27,6 +29,7 @@ counterSL = 0
 speed = 5
 looksLeft = True
 
+
 class ImageCache(dict):
     def __init__(self):
         super().__init__()
@@ -39,9 +42,11 @@ class ImageCache(dict):
             self._image_library[path] = self._load_image(path)
         return image
 
-    def _load_image(self, path):
+    @staticmethod
+    def _load_image(path):
         canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
         return pygame.image.load(canonicalized_path)
+
 
 imageCache = ImageCache()
 

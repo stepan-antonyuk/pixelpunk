@@ -18,8 +18,6 @@ while not crashed:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             crashed = True
 
-
-
     pygame.display.update()
     clock.tick(60)
 
