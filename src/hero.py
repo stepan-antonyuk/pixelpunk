@@ -11,6 +11,8 @@ class Hero:
         # self.limit = self.world.surface_altitude
         self.xxx = 0
     def move_left(self):
-        self.x -= 1
+        self.x -= self.speed
     def move_right(self):
-        self.x += 1
+        self.x += self.speed
+
+    pos = property(lambda self: (self.x, self.y))
