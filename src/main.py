@@ -25,17 +25,25 @@ counterR = 0
 counterSR = 0
 counterSL = 0
 speed = 5
-side = True
+looksLeft = True
 
-_image_library = {}
-def get_image(path):
-        global _image_library
-        image = _image_library.get(path)
-        if image == None:
-                canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
-                image = pygame.image.load(canonicalized_path)
-                _image_library[path] = image
+class ImageCache(dict):
+    def __init__(self):
+        super().__init__()
+        self._image_library = {}
+
+    def get_image(self, path):
+        image = self._image_library.get(path)
+        if image is None:
+            image = self._load_image(path)
+            self._image_library[path] = self._load_image(path)
         return image
+
+    def _load_image(self, path):
+        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+        return pygame.image.load(canonicalized_path)
+
+imageCache = ImageCache()
 
 while not done:
     for event in pygame.event.get():
@@ -48,23 +56,23 @@ while not done:
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_LEFT]:
-        side = False
+        looksLeft = False
         hero.move_left()
-        player = screen.blit(get_image(imagesL[counterL]), hero.pos)
+        player = screen.blit(imageCache.get_image(imagesL[counterL]), hero.pos)
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
     elif pressed[pygame.K_RIGHT]:
-        side = True
+        looksLeft = True
         hero.move_right()
-        player = screen.blit(get_image(imagesR[counterR]), hero.pos)
+        player = screen.blit(imageCache.get_image(imagesR[counterR]), hero.pos)
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0
     else:
-        if side == True:
-            player = screen.blit(get_image(imagesSR[counterSR]), hero.pos)
+        if looksLeft:
+            player = screen.blit(imageCache.get_image(imagesSR[counterSR]), hero.pos)
             counterSR = (counterSR + 1) % len(imagesSR)
         else:
-            player = screen.blit(get_image(imagesSL[counterSL]), hero.pos)
+            player = screen.blit(imageCache.get_image(imagesSL[counterSL]), hero.pos)
             counterSL = (counterSL + 1) % len(imagesSL)
 
     pygame.display.flip()
