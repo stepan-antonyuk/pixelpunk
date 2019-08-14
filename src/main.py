@@ -4,7 +4,7 @@ from world import *
 from hero import *
 
 x = 240
-y = 240
+y = 400
 color = (0, 128, 255)
 FPS = 60
 HOR_SPEED = 12
@@ -21,6 +21,7 @@ imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
 counterL = 0
 counterR = 0
+speed = 5
 
 _image_library = {}
 def get_image(path):
@@ -44,12 +45,14 @@ while not done:
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_LEFT]:
         hero.move_left()
-        player = screen.blit(get_image(imagesL[counterL]), (x, y, 240, 240))
+        x -= speed
+        player = screen.blit(get_image(imagesL[counterL]), (x, y))
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
-    if pressed[pygame.K_RIGHT]:
+    elif pressed[pygame.K_RIGHT]:
         hero.move_right()
-        player = screen.blit(get_image(imagesR[counterR]), (x, y, 240, 240))
+        x += speed
+        player = screen.blit(get_image(imagesR[counterR]), (x, y))
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0
     # else:
