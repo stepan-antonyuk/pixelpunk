@@ -61,12 +61,17 @@ while not done:
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_DOWN]:
-        if looksLeft or pressed[pygame.K_RIGHT]:
+        if pressed[pygame.K_RIGHT]:
             player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
             looksLeft = True
-        elif not looksLeft or pressed[pygame.K_LEFT]:
+        if pressed[pygame.K_LEFT]:
             player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
             looksLeft = False
+        else:
+            if looksLeft:
+                player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
+            else:
+                player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move_left()
