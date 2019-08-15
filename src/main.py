@@ -15,7 +15,7 @@ world = World(surface_altitudes=[
     (800, 360), (900, 260), (1000, 360),
     (1200, 100), (1250, 280), (1500, 360), (2000, -10000)
 ], bounce=0.2)
-hero = Hero(world=world, x=240, y=240, speed=5, velocity=HOR_SPEED)
+hero = Hero(world=world, x=240, y=240, speed=7, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
@@ -26,7 +26,7 @@ counterL = 0
 counterR = 0
 counterSR = 0
 counterSL = 0
-speed = 5
+speed = 7
 looksLeft = True
 
 
@@ -44,7 +44,7 @@ class ImageCache(dict):
 
     @staticmethod
     def _load_image(path):
-        canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+        canonicalized_path = '../resources/' + path #path.replace('/', os.sep).replace('\\', os.sep)
         return pygame.image.load(canonicalized_path)
 
 
@@ -60,7 +60,14 @@ while not done:
     screen.fill((255, 255, 255))
 
     pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_LEFT]:
+    if pressed[pygame.K_DOWN]:
+        if looksLeft or pressed[pygame.K_RIGHT]:
+            player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
+            looksLeft = True
+        elif not looksLeft or pressed[pygame.K_LEFT]:
+            player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
+            looksLeft = False
+    elif pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move_left()
         player = screen.blit(imageCache.get_image(imagesL[counterL]), hero.pos)
