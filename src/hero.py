@@ -18,9 +18,9 @@ class Hero:
         self.x += self.speed
 
     def move_down(self):
-        self.y -= 5
+        self.y += 5
 
     def move_up(self):
-        self.y += 5
+        self.y -= 5
 
     pos = property(lambda self: (self.x, self.y))

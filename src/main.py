@@ -3,6 +3,8 @@ import os
 from world import *
 from hero import *
 
+stairPosX = [[500, 550]]
+
 color = (0, 128, 255)
 FPS = 60
 HOR_SPEED = 12
@@ -91,6 +93,13 @@ while not done:
         else:
             player = screen.blit(imageCache.get_image(imagesSL[counterSL]), hero.pos)
             counterSL = (counterSL + 1) % len(imagesSL)
+
+    if 500 <= hero.x  <= 550 and -1000 <= hero.y <= 1000:
+        if pressed[pygame.K_DOWN]:
+            hero.move_down()
+        elif pressed[pygame.K_UP]:
+            hero.move_up()
+
     pygame.display.flip()
     clock.tick(FPS)
 
