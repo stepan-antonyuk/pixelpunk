@@ -60,11 +60,11 @@ while not done:
     screen.fill((255, 255, 255))
 
     pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_DOWN]:
+    if pressed[pygame.K_LCTRL]:
         if pressed[pygame.K_RIGHT]:
             player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
             looksLeft = True
-        if pressed[pygame.K_LEFT]:
+        elif pressed[pygame.K_LEFT]:
             player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
             looksLeft = False
         else:
@@ -91,7 +91,6 @@ while not done:
         else:
             player = screen.blit(imageCache.get_image(imagesSL[counterSL]), hero.pos)
             counterSL = (counterSL + 1) % len(imagesSL)
-
     pygame.display.flip()
     clock.tick(FPS)
 
