@@ -23,11 +23,13 @@ imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
 imagesSR = ['Frame1SR.png', 'Frame2SR.png', 'Frame3SR.png', 'Frame4SR.png', 'Frame5SR.png', 'Frame6SR.png']
 imagesSL = ['Frame1SL.png', 'Frame2SL.png', 'Frame3SL.png', 'Frame4SL.png', 'Frame5SL.png', 'Frame6SL.png']
+imagesCC = ['Claim1.png','Claim1.png','Claim1.png','Claim1.png','Claim1.png','Claim1.png', 'Claim2.png','Claim2.png','Claim2.png','Claim2.png','Claim2.png','Claim2.png',]
 
 counterL = 0
 counterR = 0
 counterSR = 0
 counterSL = 0
+counterCC = 0
 speed = 7
 looksLeft = True
 
@@ -74,6 +76,14 @@ while not done:
                 player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
             else:
                 player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
+    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 550 and -1000 <= hero.y <= 1000):
+        hero.move_down()
+        player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
+        counterCC = (counterCC + 1) % len(imagesCC)
+    elif pressed[pygame.K_UP] and (500 <= hero.x <= 550 and -1000 <= hero.y <= 1000):
+        hero.move_up()
+        player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
+        counterCC = (counterCC + 1) % len(imagesCC)
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move_left()
@@ -93,12 +103,6 @@ while not done:
         else:
             player = screen.blit(imageCache.get_image(imagesSL[counterSL]), hero.pos)
             counterSL = (counterSL + 1) % len(imagesSL)
-
-    if 500 <= hero.x  <= 550 and -1000 <= hero.y <= 1000:
-        if pressed[pygame.K_DOWN]:
-            hero.move_down()
-        elif pressed[pygame.K_UP]:
-            hero.move_up()
 
     pygame.display.flip()
     clock.tick(FPS)
