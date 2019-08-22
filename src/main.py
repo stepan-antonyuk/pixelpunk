@@ -58,7 +58,8 @@ imageCache = ImageCache()
 def ground_line():
     ground_level = 500
     width, height = screen.get_size()
-    pygame.draw.line(screen, 0, (0, ground_level), (width, ground_level))
+    pygame.draw.line(screen, 0, (0, ground_level), (570, ground_level))
+    pygame.draw.line(screen, 0, (700, ground_level), (1920, ground_level))
 
 while not done:
     for event in pygame.event.get():
@@ -83,11 +84,11 @@ while not done:
                 player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
             else:
                 player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
-    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 550 and -1000 <= hero.y <= 1000):
+    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 530 and -1000 <= hero.y <= 1000):
         hero.move_down()
         player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
         counterCC = (counterCC + 1) % len(imagesCC)
-    elif pressed[pygame.K_UP] and (500 <= hero.x <= 550 and -1000 <= hero.y <= 1000):
+    elif pressed[pygame.K_UP] and (500 <= hero.x <= 530 and 260 <= hero.y <= 800):
         hero.move_up()
         player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
         counterCC = (counterCC + 1) % len(imagesCC)
