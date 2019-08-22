@@ -56,8 +56,9 @@ imageCache = ImageCache()
 
 
 def ground_line():
+    ground_level = 500
     width, height = screen.get_size()
-    pygame.draw.line(screen, 0, (0, 500), (width, 500))
+    pygame.draw.line(screen, 0, (0, ground_level), (width, ground_level))
 
 while not done:
     for event in pygame.event.get():
