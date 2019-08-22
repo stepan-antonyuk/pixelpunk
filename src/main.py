@@ -54,6 +54,11 @@ class ImageCache(dict):
 
 imageCache = ImageCache()
 
+
+def ground_line():
+    width, height = screen.get_size()
+    pygame.draw.line(screen, 0, (0, 500), (width, 500))
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,6 +67,7 @@ while not done:
             done = True
 
     screen.fill((255, 255, 255))
+    ground_line()
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_LCTRL]:
