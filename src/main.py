@@ -21,8 +21,8 @@ hero = Hero(world=world, x=240, y=240, speed=7, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
-imagesSR = ['Frame1SR.png', 'Frame2SR.png', 'Frame3SR.png', 'Frame4SR.png', 'Frame5SR.png', 'Frame6SR.png']
-imagesSL = ['Frame1SL.png', 'Frame2SL.png', 'Frame3SL.png', 'Frame4SL.png', 'Frame5SL.png', 'Frame6SL.png']
+imagesSR = ['Frame1SR.png','Frame1SR.png','Frame1SR.png','Frame1SR.png','Frame1SR.png','Frame1SR.png', 'Frame2SR.png','Frame2SR.png','Frame2SR.png','Frame2SR.png','Frame2SR.png','Frame2SR.png', 'Frame3SR.png','Frame3SR.png','Frame3SR.png','Frame3SR.png','Frame3SR.png','Frame3SR.png', 'Frame4SR.png','Frame4SR.png','Frame4SR.png','Frame4SR.png','Frame4SR.png','Frame4SR.png', 'Frame5SR.png','Frame5SR.png','Frame5SR.png','Frame5SR.png','Frame5SR.png','Frame5SR.png', 'Frame6SR.png','Frame6SR.png','Frame6SR.png','Frame6SR.png','Frame6SR.png','Frame6SR.png']
+imagesSL = ['Frame1SL.png','Frame1SL.png','Frame1SL.png','Frame1SL.png','Frame1SL.png','Frame1SL.png', 'Frame2SL.png', 'Frame2SL.png', 'Frame2SL.png', 'Frame2SL.png', 'Frame2SL.png', 'Frame2SL.png', 'Frame3SL.png', 'Frame3SL.png', 'Frame3SL.png', 'Frame3SL.png', 'Frame3SL.png', 'Frame3SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame5SL.png','Frame5SL.png','Frame5SL.png','Frame5SL.png','Frame5SL.png','Frame5SL.png', 'Frame6SL.png','Frame6SL.png','Frame6SL.png','Frame6SL.png','Frame6SL.png','Frame6SR.png']
 imagesCC = ['Claim1.png','Claim1.png','Claim1.png','Claim1.png','Claim1.png','Claim1.png', 'Claim2.png','Claim2.png','Claim2.png','Claim2.png','Claim2.png','Claim2.png',]
 
 counterL = 0
