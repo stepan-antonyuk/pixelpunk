@@ -23,4 +23,7 @@ class Hero:
     def move_up(self):
         self.y -= 5
 
+    def Staing(self):
+        for i in
+
     pos = property(lambda self: (self.x, self.y))
