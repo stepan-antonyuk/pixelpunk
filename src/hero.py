@@ -23,8 +23,8 @@ class Hero:
     def move_up(self):
         self.y -= 5
 
-    def Staing(self):
-        for i in world._surface_altitudes:
+    def staying(self):
+        for i in self.world.surface_altitudes:
             if i[0] <= (self.x, 0) <= i[1]:
 
 
