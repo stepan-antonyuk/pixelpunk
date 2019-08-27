@@ -32,6 +32,7 @@ class Hero:
                     self.velocity = 0
         if self.staying:
             self.staying = False
+
     def gravity(self):
         if not self.staying:
             self.y -= self.velocity
