@@ -12,8 +12,8 @@ clock = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 done = False
-world = World(surface_altitudes=[[(0, 420),(500, 420)], [(618, 420),(1920, 420)], [(618, 420),(618, 500)], [(618, 500),(1920, 500)]], bounce=0.2)
-hero = Hero(world=world, x=240, y=240, speed=7, velocity=HOR_SPEED)
+world = World(surface_altitudes=[((0, 420),(500, 420)), ((618, 420),(1920, 420)), ((618, 420),(618, 500)), ((618, 500),(1920, 500))], bounce=0.2)
+hero = Hero(world=world, x=240, y=240, speed=7, velocity=HOR_SPEED, staying = False)
 
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
