@@ -13,7 +13,7 @@ pygame.init()
 screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 done = False
 world = World(surface_altitudes=[((0, 420),(500, 420)), ((618, 420),(1920, 420)), ((618, 420),(618, 500)), ((618, 500),(1920, 500))], bounce=0.2)
-hero = Hero(world=world, x=240, y=240, speed=7, velocity=HOR_SPEED, staying = False)
+hero = Hero(world=world, x=228, y=228, speed=7, velocity=HOR_SPEED, staying = False)
 
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
@@ -78,11 +78,11 @@ while not done:
                 player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
             else:
                 player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
-    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 530 and 0 <= hero.y <= 600):
+    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 530 and 228 <= hero.y <= 600):
         hero.move_down()
         player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
         counterCC = (counterCC + 1) % len(imagesCC)
-    elif pressed[pygame.K_UP] and (500 <= hero.x <= 530 and 245 <= hero.y <= 900):
+    elif pressed[pygame.K_UP] and (500 <= hero.x <= 530 and 228 < hero.y <= 900):
         hero.move_up()
         player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
         counterCC = (counterCC + 1) % len(imagesCC)
