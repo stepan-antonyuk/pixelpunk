@@ -24,6 +24,8 @@ class Hero:
         self.y -= 5
 
     def Staing(self):
-        for i in
+        for i in world._surface_altitudes:
+            if i[0] <= (self.x, 0) <= i[1]:
+
 
     pos = property(lambda self: (self.x, self.y))

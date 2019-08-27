@@ -52,7 +52,7 @@ imageCache = ImageCache()
 
 
 def ground_line():
-    for coordinate in world.surface_altitudes:
+    for coordinate in world._surface_altitudes:
         pygame.draw.line(screen, 0, coordinate[0], coordinate[1], 4)
 
 while not done:
