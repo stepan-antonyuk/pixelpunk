@@ -1,13 +1,13 @@
 class Hero:
 
-    def __init__(self, world, x, y, speed=0, velocity=0, staying=False):
+    def __init__(self, world, x, y, speed=0, velocity=0, is_staying=False):
         self.world = world
         self.x = x
         self.y = y
         self.speed = speed
         self.max_velocity = velocity
         self.velocity = 0
-        self.staying = staying
+        self.is_staying = is_staying
         # self.alt = self.world.surface_altitude
         # self.limit = self.world.surface_altitude
         self.xxx = 0
@@ -25,16 +25,16 @@ class Hero:
         self.y -= 5
 
     def staying(self):
-        for ((x1, y1), (x2, _)) in self.world.surface_altitudes:
+        for ((x1, y1), (x2, _)) in self.world._surface_altitudes:
             if (x1 <= self.x <= x2) or (x1 <= (self.x + 56) <= x2):
-                if ((y1 + 192) == self.x) and (y1 == (self.x - 192)):
-                    self.staying = True
+                if ((y1 + 192) == self.y) and (y1 == (self.y - 192)):
+                    self.is_staying = True
                     self.velocity = 0
-        if self.staying:
-            self.staying = False
+        if self.is_staying:
+            self.is_staying = False
 
     def gravity(self):
-        if not self.staying:
+        if not self.is_staying:
             self.y -= self.velocity
             self.velocity += 4
 
