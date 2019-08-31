@@ -1,7 +1,7 @@
 import pygame
-import os
-from world import *
+
 from hero import *
+from world import *
 
 stairPosX = [[500, 550]]
 
