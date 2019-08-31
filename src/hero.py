@@ -25,17 +25,16 @@ class Hero:
         self.y -= 5
 
     def staying(self):
+        self.is_staying = False
         for ((x1, y1), (x2, _)) in self.world._surface_altitudes:
             if (x1 <= self.x <= x2) or (x1 <= (self.x + 56) <= x2):
-                if ((y1 + 192) == self.y) and (y1 == (self.y - 192)):
+                if ((y1 + 3) >= (self.y) >=(y1 - 3)):
                     self.is_staying = True
                     self.velocity = 0
-        if self.is_staying:
-            self.is_staying = False
 
     def gravity(self):
         if not self.is_staying:
-            self.y -= self.velocity
+            self.y += self.velocity
             self.velocity += 4
 
     pos = property(lambda self: (self.x, self.y))
