@@ -32,8 +32,8 @@ imagesSL = ['Frame1SL.png', 'Frame1SL.png', 'Frame1SL.png', 'Frame1SL.png', 'Fra
             'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png', 'Frame4SL.png',
             'Frame5SL.png', 'Frame5SL.png', 'Frame5SL.png', 'Frame5SL.png', 'Frame5SL.png', 'Frame5SL.png',
             'Frame6SL.png', 'Frame6SL.png', 'Frame6SL.png', 'Frame6SL.png', 'Frame6SL.png', 'Frame6SL.png']
-imagesCC = ['Claim1.png', 'Claim1.png', 'Claim1.png', 'Claim1.png', 'Claim1.png', 'Claim1.png', 'Claim2.png',
-            'Claim2.png', 'Claim2.png', 'Claim2.png', 'Claim2.png', 'Claim2.png', ]
+imagesCC = ['Climb1.png', 'Climb1.png', 'Climb1.png', 'Climb1.png', 'Climb1.png', 'Climb1.png', 'Climb2.png',
+            'Climb2.png', 'Climb2.png', 'Climb2.png', 'Climb2.png', 'Climb2.png', ]
 
 counterL = 0
 counterR = 0
