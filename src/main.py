@@ -121,6 +121,7 @@ while not done:
             render_hero(imageCache.get_image(imagesCC[counterCC]))
             counterCC = (counterCC + 1) % len(imagesCC)
         else:
+            hero.jump()
             render_hero_staying()
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
