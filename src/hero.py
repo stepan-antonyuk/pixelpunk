@@ -27,7 +27,7 @@ class Hero:
 
     def jump(self):
         if not self._is_falling() and not self.on_stairs():
-            self.velocity = -50
+            self.velocity = -30
             self.y += self.velocity
 
     def _is_falling(self):

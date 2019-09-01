@@ -15,7 +15,7 @@ done = False
 world = World(surface_altitudes=[
     ((0, 420), (500, 420)), ((500, 600), (618, 600)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)),
     ((618, 500), (1920, 500))],
-    bounce=0.2)
+    bounce=0.2, box_position=[[50, 50]])
 hero = Hero(world=world, x=0, y=0, speed=7, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
@@ -69,6 +69,12 @@ def ground_line():
     for coordinate in world.surface_altitudes:
         pygame.draw.line(screen, 0, coordinate[0], coordinate[1], 4)
 
+def box(self):
+    for coordinate in self.box_position:
+        pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1]), 4)
+        pygame.draw.line(screen, 0, (coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60), 4)
+        pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0], coordinate[1] + 60), 4)
+        pygame.draw.line(screen, 0, (coordinate[0] + 60, coordinate[1]), (coordinate[0] + 60, coordinate[1] + 60), 4)
 
 def render_hero(image):
     (x, y) = hero.pos
@@ -96,7 +102,9 @@ while not done:
     ground_line()
 
     pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_LCTRL]:
+    is_pressed = False
+    if pressed[pygame.K_LCTRL] and is_pressed == False:
+        is_pressed = True
         if pressed[pygame.K_RIGHT]:
             render_hero(imageCache.get_image('LayR.png'))
             looksLeft = True
@@ -115,6 +123,20 @@ while not done:
             counterCC = (counterCC + 1) % len(imagesCC)
         else:
             render_hero_staying()
+    if pressed[pygame.K_LEFT] and is_pressed == False:
+        is_pressed = True
+        looksLeft = False
+        hero.move(World.LEFT)
+        render_hero(imageCache.get_image(imagesL[counterL]))
+        counterL = (counterL + 1) % len(imagesL)
+        counterR = 0
+    if pressed[pygame.K_RIGHT] and is_pressed == False:
+        is_pressed = True
+        looksLeft = True
+        hero.move(World.RIGHT)
+        render_hero(imageCache.get_image(imagesR[counterR]))
+        counterR = (counterR + 1) % len(imagesR)
+        counterL = 0
     if pressed[pygame.K_UP]:
         if hero.on_stairs():
             hero.climb_up()
@@ -123,19 +145,7 @@ while not done:
         else:
             hero.jump()
             render_hero_staying()
-    if pressed[pygame.K_LEFT]:
-        looksLeft = False
-        hero.move(World.LEFT)
-        render_hero(imageCache.get_image(imagesL[counterL]))
-        counterL = (counterL + 1) % len(imagesL)
-        counterR = 0
-    elif pressed[pygame.K_RIGHT]:
-        looksLeft = True
-        hero.move(World.RIGHT)
-        render_hero(imageCache.get_image(imagesR[counterR]))
-        counterR = (counterR + 1) % len(imagesR)
-        counterL = 0
-    else:
+    if is_pressed == False:
         render_hero_staying()
 
     hero.gravity()
