@@ -69,6 +69,11 @@ def ground_line():
         pygame.draw.line(screen, 0, coordinate[0], coordinate[1], 4)
 
 
+def render_hero(image):
+    (x, y) = hero.pos
+    screen.blit(image, (x, y - image.get_height()))
+
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,42 +87,42 @@ while not done:
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_LCTRL]:
         if pressed[pygame.K_RIGHT]:
-            player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
+            render_hero(imageCache.get_image('LayR.png'))
             looksLeft = True
         elif pressed[pygame.K_LEFT]:
-            player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
+            render_hero(imageCache.get_image('LayL.png'))
             looksLeft = False
         else:
             if looksLeft:
-                player = screen.blit(imageCache.get_image('LayR.png'), hero.pos)
+                render_hero(imageCache.get_image('LayR.png'))
             else:
-                player = screen.blit(imageCache.get_image('LayL.png'), hero.pos)
+                render_hero(imageCache.get_image('LayL.png'))
     elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 530 and 228 <= hero.y <= 600):
         hero.move_down()
-        player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
+        render_hero(imageCache.get_image(imagesCC[counterCC]))
         counterCC = (counterCC + 1) % len(imagesCC)
     elif pressed[pygame.K_UP] and (500 <= hero.x <= 530 and 228 < hero.y <= 900):
         hero.move_up()
-        player = screen.blit(imageCache.get_image(imagesCC[counterCC]), hero.pos)
+        render_hero(imageCache.get_image(imagesCC[counterCC]))
         counterCC = (counterCC + 1) % len(imagesCC)
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move_left()
-        player = screen.blit(imageCache.get_image(imagesL[counterL]), hero.pos)
+        render_hero(imageCache.get_image(imagesL[counterL]))
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
     elif pressed[pygame.K_RIGHT]:
         looksLeft = True
         hero.move_right()
-        player = screen.blit(imageCache.get_image(imagesR[counterR]), hero.pos)
+        render_hero(imageCache.get_image(imagesR[counterR]))
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0
     else:
         if looksLeft:
-            player = screen.blit(imageCache.get_image(imagesSR[counterSR]), hero.pos)
+            render_hero(imageCache.get_image(imagesSR[counterSR]))
             counterSR = (counterSR + 1) % len(imagesSR)
         else:
-            player = screen.blit(imageCache.get_image(imagesSL[counterSL]), hero.pos)
+            render_hero(imageCache.get_image(imagesSL[counterSL]))
             counterSL = (counterSL + 1) % len(imagesSL)
     hero.gravity()
 
