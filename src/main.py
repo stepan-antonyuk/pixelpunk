@@ -108,14 +108,14 @@ while not done:
                 render_hero(imageCache.get_image('LayR.png'))
             else:
                 render_hero(imageCache.get_image('LayL.png'))
-    elif pressed[pygame.K_DOWN]:
+    if pressed[pygame.K_DOWN]:
         if hero.on_stairs():
             hero.climb_down()
             render_hero(imageCache.get_image(imagesCC[counterCC]))
             counterCC = (counterCC + 1) % len(imagesCC)
         else:
             render_hero_staying()
-    elif pressed[pygame.K_UP]:
+    if pressed[pygame.K_UP]:
         if hero.on_stairs():
             hero.climb_up()
             render_hero(imageCache.get_image(imagesCC[counterCC]))
@@ -123,7 +123,7 @@ while not done:
         else:
             hero.jump()
             render_hero_staying()
-    elif pressed[pygame.K_LEFT]:
+    if pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move(World.LEFT)
         render_hero(imageCache.get_image(imagesL[counterL]))
