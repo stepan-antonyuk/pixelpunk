@@ -15,7 +15,7 @@ done = False
 world = World(surface_altitudes=[
     ((0, 420), (500, 420)), ((500, 600), (618, 600)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)),
     ((618, 500), (1920, 500))],
-    bounce=0.2, box_position=[[50, 50]])
+    bounce=0.2, box_position=[[100, 100]])
 hero = Hero(world=world, x=0, y=0, speed=7, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
@@ -70,8 +70,8 @@ def ground_line():
         pygame.draw.line(screen, 0, coordinate[0], coordinate[1], 4)
 
 
-def box(self):
-    for coordinate in self.box_position:
+def render_box():
+    for coordinate in world.box_position:
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1]), 4)
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60), 4)
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0], coordinate[1] + 60), 4)
@@ -151,6 +151,7 @@ while not done:
         render_hero_staying()
 
     hero.gravity()
+    render_box()
 
     pygame.display.flip()
     clock.tick(FPS)
