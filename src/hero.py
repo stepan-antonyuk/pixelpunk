@@ -18,14 +18,14 @@ class Hero:
         self.x += self.speed
 
     def climb_down(self):
-        if self._on_stairs():
+        if self.on_stairs():
             self.y += 5
 
     def climb_up(self):
-        if self._on_stairs():
+        if self.on_stairs():
             self.y -= 5
 
-    def _on_stairs(self):
+    def on_stairs(self):
         return 500 <= self.x <= 530 and 228 < self.y <= 900
 
     def _is_falling(self):

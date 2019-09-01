@@ -13,7 +13,8 @@ pygame.init()
 screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 done = False
 world = World(surface_altitudes=[
-    ((0, 420), (500, 420)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)), ((618, 500), (1920, 500))],
+    ((0, 420), (500, 420)), ((500, 600), (618, 600)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)),
+    ((618, 500), (1920, 500))],
     bounce=0.2)
 hero = Hero(world=world, x=0, y=0, speed=7, velocity=HOR_SPEED)
 
@@ -74,6 +75,16 @@ def render_hero(image):
     screen.blit(image, (x, y - image.get_height()))
 
 
+def render_hero_staying():
+    global counterSR, counterSL
+    if looksLeft:
+        render_hero(imageCache.get_image(imagesSR[counterSR]))
+        counterSR = (counterSR + 1) % len(imagesSR)
+    else:
+        render_hero(imageCache.get_image(imagesSL[counterSL]))
+        counterSL = (counterSL + 1) % len(imagesSL)
+
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -98,13 +109,19 @@ while not done:
             else:
                 render_hero(imageCache.get_image('LayL.png'))
     elif pressed[pygame.K_DOWN]:
-        hero.climb_down()
-        render_hero(imageCache.get_image(imagesCC[counterCC]))
-        counterCC = (counterCC + 1) % len(imagesCC)
+        if hero.on_stairs():
+            hero.climb_down()
+            render_hero(imageCache.get_image(imagesCC[counterCC]))
+            counterCC = (counterCC + 1) % len(imagesCC)
+        else:
+            render_hero_staying()
     elif pressed[pygame.K_UP]:
-        hero.climb_up()
-        render_hero(imageCache.get_image(imagesCC[counterCC]))
-        counterCC = (counterCC + 1) % len(imagesCC)
+        if hero.on_stairs():
+            hero.climb_up()
+            render_hero(imageCache.get_image(imagesCC[counterCC]))
+            counterCC = (counterCC + 1) % len(imagesCC)
+        else:
+            render_hero_staying()
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
         hero.move_left()
@@ -118,12 +135,8 @@ while not done:
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0
     else:
-        if looksLeft:
-            render_hero(imageCache.get_image(imagesSR[counterSR]))
-            counterSR = (counterSR + 1) % len(imagesSR)
-        else:
-            render_hero(imageCache.get_image(imagesSL[counterSL]))
-            counterSL = (counterSL + 1) % len(imagesSL)
+        render_hero_staying()
+
     hero.gravity()
 
     pygame.display.flip()
