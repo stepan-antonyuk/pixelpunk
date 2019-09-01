@@ -125,13 +125,13 @@ while not done:
             render_hero_staying()
     elif pressed[pygame.K_LEFT]:
         looksLeft = False
-        hero.move_left()
+        hero.move(World.LEFT)
         render_hero(imageCache.get_image(imagesL[counterL]))
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
     elif pressed[pygame.K_RIGHT]:
         looksLeft = True
-        hero.move_right()
+        hero.move(World.RIGHT)
         render_hero(imageCache.get_image(imagesR[counterR]))
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0

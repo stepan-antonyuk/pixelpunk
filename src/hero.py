@@ -11,11 +11,8 @@ class Hero:
         # self.limit = self.world.surface_altitude
         self.xxx = 0
 
-    def move_left(self):
-        self.x -= self.speed
-
-    def move_right(self):
-        self.x += self.speed
+    def move(self, direction):
+        self.x += self.speed * direction
 
     def climb_down(self):
         if self.on_stairs():
