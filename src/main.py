@@ -105,7 +105,7 @@ while not done:
 
     pressed = pygame.key.get_pressed()
     is_pressed = False
-    if pressed[pygame.K_LCTRL] and is_pressed == False:
+    if pressed[pygame.K_LCTRL] and not is_pressed:
         is_pressed = True
         if pressed[pygame.K_RIGHT]:
             render_hero(imageCache.get_image('LayR.png'))
@@ -125,14 +125,14 @@ while not done:
             counterCC = (counterCC + 1) % len(imagesCC)
         else:
             render_hero_staying()
-    if pressed[pygame.K_LEFT] and is_pressed == False:
+    if pressed[pygame.K_LEFT] and not is_pressed:
         is_pressed = True
         looksLeft = False
         hero.move(World.LEFT)
         render_hero(imageCache.get_image(imagesL[counterL]))
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
-    if pressed[pygame.K_RIGHT] and is_pressed == False:
+    if pressed[pygame.K_RIGHT] and not is_pressed:
         is_pressed = True
         looksLeft = True
         hero.move(World.RIGHT)
@@ -147,7 +147,7 @@ while not done:
         else:
             hero.jump()
             render_hero_staying()
-    if is_pressed == False:
+    if not is_pressed:
         render_hero_staying()
 
     hero.gravity()
