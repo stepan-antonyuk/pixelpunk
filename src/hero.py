@@ -17,10 +17,10 @@ class Hero:
     def move_right(self):
         self.x += self.speed
 
-    def move_down(self):
+    def climb_down(self):
         self.y += 5
 
-    def move_up(self):
+    def climb_up(self):
         self.y -= 5
 
     def _is_falling(self):
