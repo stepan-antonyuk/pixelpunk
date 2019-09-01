@@ -18,10 +18,15 @@ class Hero:
         self.x += self.speed
 
     def climb_down(self):
-        self.y += 5
+        if self._on_stairs():
+            self.y += 5
 
     def climb_up(self):
-        self.y -= 5
+        if self._on_stairs():
+            self.y -= 5
+
+    def _on_stairs(self):
+        return 500 <= self.x <= 530 and 228 < self.y <= 900
 
     def _is_falling(self):
         for ((x1, y1), (x2, _)) in self.world.surface_altitudes:

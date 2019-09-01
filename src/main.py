@@ -97,11 +97,11 @@ while not done:
                 render_hero(imageCache.get_image('LayR.png'))
             else:
                 render_hero(imageCache.get_image('LayL.png'))
-    elif pressed[pygame.K_DOWN] and (500 <= hero.x <= 530 and 228 <= hero.y <= 600):
+    elif pressed[pygame.K_DOWN]:
         hero.climb_down()
         render_hero(imageCache.get_image(imagesCC[counterCC]))
         counterCC = (counterCC + 1) % len(imagesCC)
-    elif pressed[pygame.K_UP] and (500 <= hero.x <= 530 and 228 < hero.y <= 900):
+    elif pressed[pygame.K_UP]:
         hero.climb_up()
         render_hero(imageCache.get_image(imagesCC[counterCC]))
         counterCC = (counterCC + 1) % len(imagesCC)
