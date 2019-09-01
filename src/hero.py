@@ -26,9 +26,12 @@ class Hero:
     def _is_falling(self):
         for ((x1, y1), (x2, _)) in self.world.surface_altitudes:
             if (x1 <= self.x <= x2) or (x1 <= (self.x + 56) <= x2):
-                if (y1 + 4) >= (self.y + 4) >= (y1 - 4):
+                if y1 == self.y:
                     self.velocity = 0
                     return False
+                if self.y < y1 < self.y + self.velocity:
+                    self.velocity = y1 - self.y
+                    return True
         return True
 
     def gravity(self):
