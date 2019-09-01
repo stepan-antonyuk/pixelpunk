@@ -69,12 +69,14 @@ def ground_line():
     for coordinate in world.surface_altitudes:
         pygame.draw.line(screen, 0, coordinate[0], coordinate[1], 4)
 
+
 def box(self):
     for coordinate in self.box_position:
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1]), 4)
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60), 4)
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0], coordinate[1] + 60), 4)
         pygame.draw.line(screen, 0, (coordinate[0] + 60, coordinate[1]), (coordinate[0] + 60, coordinate[1] + 60), 4)
+
 
 def render_hero(image):
     (x, y) = hero.pos
