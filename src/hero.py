@@ -39,6 +39,14 @@ class Hero:
                 if self.y < y1 < self.y + self.velocity:
                     self.velocity = y1 - self.y
                     return True
+        for cordinate in self.world.box_position:
+            if (cordinate[0] <= self.x <= (cordinate[0] + 60)) or (cordinate[0] <= (self.x + 56) <= (cordinate[0] + 60)):
+                if cordinate[1] == self.y:
+                    self.velocity = min(self.velocity, 0)
+                    return False
+                if self.y < cordinate[1] < self.y + self.velocity:
+                    self.velocity = cordinate[1] - self.y
+                    return True
         return True
 
     def gravity(self):
