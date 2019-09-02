@@ -151,7 +151,7 @@ while not done:
         render_hero_staying()
 
     hero.gravity()
-    r ender_box()
+    render_box()
 
     pygame.display.flip()
     clock.tick(FPS)
