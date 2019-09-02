@@ -49,6 +49,17 @@ class Hero:
                     return True
         return True
 
+    def is_wall(self):
+        for ((x1, y1), (x2, y2)) in self.world.surface_altitudes:
+            if ((y1 < (self.y or (self.y +192) < y2)) or (y2 < (self.y or (self.y +192) < y1))) or (self.y < (y1 and y2) < (self.y + 192)):
+                if (x1 or x2) == self.x:
+                    self.velocity = min(self.speed, 0)
+                    return True
+                if (self.x < (x1 or x2) < self.x + self.velocity) or (self.x - self.velocity < (x1 or x2) < self.x):
+                    self.speed = (x1 or x2) - self.speed
+                    return False
+        return False
+
     def gravity(self):
         if self._is_falling():
             self.y += self.velocity

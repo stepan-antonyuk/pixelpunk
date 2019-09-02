@@ -15,7 +15,7 @@ done = False
 world = World(surface_altitudes=[
     ((0, 420), (500, 420)), ((500, 600), (618, 600)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)),
     ((618, 500), (1920, 500))],
-    bounce=0.2, box_position=[[400, 300]])
+    bounce=0.2, box_position=[[400, 300], [800, 300]])
 hero = Hero(world=world, x=0, y=0, speed=7, velocity=HOR_SPEED)
 
 imagesL = ['Detective-main-left.png']
