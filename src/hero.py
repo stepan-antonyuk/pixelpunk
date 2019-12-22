@@ -60,13 +60,13 @@ class Hero:
                     if (self.x - 7) <= x1 <= self.x:
                         if y1 > y2:
                             if ((self.y - 192) < y1) and (self.y > y2):
-                                self.speed = self.x - x1 + 1
+                                self.speed = self.x - x1 - 1
                                 self.move(direction)
                                 self.speed = 7
                                 return True
                         elif y1 < y2:
                             if ((self.y - 192) < y2) and (self.y > y1):
-                                self.speed = self.x - x1 + 1
+                                self.speed = self.x - x1 - 1
                                 self.move(direction)
                                 self.speed = 7
                                 return True
@@ -88,14 +88,14 @@ class Hero:
             if direction == -1:
                 if (self.x - 7) <= (x1 + 60) <= self.x:
                     if ((self.y - 192) < (y1 + 60)) and (self.y > y1):
-                        self.speed = self.x - (x1 + 60)
+                        self.speed = self.x - (x1 + 60) - 1
                         self.move(direction)
                         self.speed = 7
                         return True
             elif direction == 1:
                 if ((self.x + 56) + 7) >= x1 >= (self.x + 56):
                     if ((self.y - 192) < (y1 + 60)) and (self.y > y1):
-                        self.speed = x1 - (self.x + 56)
+                        self.speed = x1 - (self.x + 56) - 1
                         self.move(direction)
                         self.speed = 7
                         return True
