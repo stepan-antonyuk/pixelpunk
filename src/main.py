@@ -104,9 +104,12 @@ while not done:
     ground_line()
 
     pressed = pygame.key.get_pressed()
+    is_pressedCtrl = False
     is_pressed = False
-    if pressed[pygame.K_LCTRL] and not is_pressed:
-        is_pressed = True
+    is_pressedLorR = False
+
+    if pressed[pygame.K_LCTRL] and not is_pressedCtrl:
+        is_pressedCtrl = True
         if pressed[pygame.K_RIGHT]:
             render_hero(imageCache.get_image('LayR.png'))
             looksLeft = True
@@ -118,28 +121,34 @@ while not done:
                 render_hero(imageCache.get_image('LayR.png'))
             else:
                 render_hero(imageCache.get_image('LayL.png'))
-    if pressed[pygame.K_DOWN]:
+    if pressed[pygame.K_DOWN] and not is_pressedCtrl:
+        is_pressed = True
         if hero.on_stairs():
             hero.climb_down()
             render_hero(imageCache.get_image(imagesCC[counterCC]))
             counterCC = (counterCC + 1) % len(imagesCC)
         else:
             render_hero_staying()
-    if pressed[pygame.K_LEFT] and not is_pressed:
+    if pressed[pygame.K_LEFT] and not is_pressedCtrl and not is_pressedLorR:
+        if not hero.is_wall(World.LEFT):
+            hero.move(World.LEFT)
         is_pressed = True
+        is_pressedLorR = True
         looksLeft = False
-        hero.move(World.LEFT)
         render_hero(imageCache.get_image(imagesL[counterL]))
         counterL = (counterL + 1) % len(imagesL)
         counterR = 0
-    if pressed[pygame.K_RIGHT] and not is_pressed:
+    if pressed[pygame.K_RIGHT] and not is_pressedCtrl and not is_pressedLorR:
+        if not hero.is_wall(World.RIGHT):
+            hero.move(World.RIGHT)
         is_pressed = True
+        is_pressedLorR = True
         looksLeft = True
-        hero.move(World.RIGHT)
         render_hero(imageCache.get_image(imagesR[counterR]))
         counterR = (counterR + 1) % len(imagesR)
         counterL = 0
-    if pressed[pygame.K_UP]:
+    if pressed[pygame.K_UP] and not is_pressedCtrl:
+        is_pressed = True
         if hero.on_stairs():
             hero.climb_up()
             render_hero(imageCache.get_image(imagesCC[counterCC]))
@@ -147,7 +156,7 @@ while not done:
         else:
             hero.jump()
             render_hero_staying()
-    if not is_pressed:
+    if not is_pressed and not is_pressedCtrl:
         render_hero_staying()
 
     hero.gravity()

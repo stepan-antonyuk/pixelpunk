@@ -23,7 +23,10 @@ class Hero:
             self.y -= 5
 
     def on_stairs(self):
-        return 500 <= self.x <= 530 and 228 < self.y <= 900
+        if 500 <= self.x <= 556:
+            return True
+        else:
+            return False
 
     def jump(self):
         if not self._is_falling() and not self.on_stairs():
@@ -39,25 +42,64 @@ class Hero:
                 if self.y < y1 < self.y + self.velocity:
                     self.velocity = y1 - self.y
                     return True
-        for cordinate in self.world.box_position:
-            if (cordinate[0] <= self.x <= (cordinate[0] + 60)) or (cordinate[0] <= (self.x + 56) <= (cordinate[0] + 60)):
-                if cordinate[1] == self.y:
+        for coordinate in self.world.box_position:
+            if (coordinate[0] <= self.x <= (coordinate[0] + 60)) or (
+                    coordinate[0] <= (self.x + 56) <= (coordinate[0] + 60)):
+                if coordinate[1] == self.y:
                     self.velocity = min(self.velocity, 0)
                     return False
-                if self.y < cordinate[1] < self.y + self.velocity:
-                    self.velocity = cordinate[1] - self.y
+                if self.y < coordinate[1] < self.y + self.velocity:
+                    self.velocity = coordinate[1] - self.y
                     return True
         return True
 
-    def is_wall(self):
+    def is_wall(self, direction):
         for ((x1, y1), (x2, y2)) in self.world.surface_altitudes:
-            if ((y1 < (self.y or (self.y +192) < y2)) or (y2 < (self.y or (self.y +192) < y1))) or (self.y < (y1 and y2) < (self.y + 192)):
-                if (x1 or x2) == self.x:
-                    self.velocity = min(self.speed, 0)
-                    return True
-                if (self.x < (x1 or x2) < self.x + self.velocity) or (self.x - self.velocity < (x1 or x2) < self.x):
-                    self.speed = (x1 or x2) - self.speed
-                    return False
+            if x1 == x2:
+                if direction == -1:
+                    if (self.x - 7) <= x1 <= self.x:
+                        if y1 > y2:
+                            if ((self.y - 192) < y1) and (self.y > y2):
+                                self.speed = self.x - x1 + 1
+                                self.move(direction)
+                                self.speed = 7
+                                return True
+                        elif y1 < y2:
+                            if ((self.y - 192) < y2) and (self.y > y1):
+                                self.speed = self.x - x1 + 1
+                                self.move(direction)
+                                self.speed = 7
+                                return True
+                elif direction == 1:
+                    if ((self.x + 56) + 7) >= x1 >= (self.x + 56):
+                        if y1 > y2:
+                            if ((self.y - 192) < y1) and (self.y > y2):
+                                self.speed = x1 - (self.x + 56) - 1
+                                self.move(direction)
+                                self.speed = 7
+                                return True
+                        elif y1 < y2:
+                            if ((self.y - 192) < y2) and (self.y > y1):
+                                self.speed = x1 - (self.x + 56) - 1
+                                self.move(direction)
+                                self.speed = 7
+                                return True
+        for ([x1, y1]) in self.world.box_position:
+            if direction == -1:
+                if (self.x - 7) <= (x1 + 60) <= self.x:
+                    if ((self.y - 192) < (y1 + 60)) and (self.y > y1):
+                        self.speed = self.x - (x1 + 60)
+                        self.move(direction)
+                        self.speed = 7
+                        return True
+            elif direction == 1:
+                if ((self.x + 56) + 7) >= x1 >= (self.x + 56):
+                    if ((self.y - 192) < (y1 + 60)) and (self.y > y1):
+                        self.speed = x1 - (self.x + 56)
+                        self.move(direction)
+                        self.speed = 7
+                        return True
+
         return False
 
     def gravity(self):
