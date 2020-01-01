@@ -3,7 +3,7 @@ import pygame
 from hero import *
 from world import *
 
-stairPosX = [[500, 550]]
+stairPosX = [[0, 1920]]
 
 color = (0, 128, 255)
 FPS = 60
@@ -13,11 +13,12 @@ pygame.init()
 screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 done = False
 world = World(surface_altitudes=[
-    ((0, 420), (500, 420)), ((500, 600), (618, 600)), ((618, 420), (1920, 420)), ((618, 420), (618, 500)),
-    ((618, 500), (1920, 500)), ((500, 420), (500, 500)), ((0, 500), (500, 500))],
+    ((0, 420), (800, 420)), ((800, 600), (900, 600)), ((900, 420), (1920, 420)), ((900, 420), (900, 500)),
+    ((900, 500), (1920, 500)), ((800, 420), (800, 500)), ((0, 500), (800, 500))],
     bounce=0.2, box_position=[[400, 300], [800, 300]])
-hero = Hero(world=world, x=0, y=0, speed=7, velocity=HOR_SPEED)
+hero = Hero(world=world, x=960, y=0, speed=7, velocity=HOR_SPEED)
 
+imagesBox = ['SomeBox.png']
 imagesL = ['Detective-main-left.png']
 imagesR = ['Detective-main-right.png']
 imagesSR = ['Frame1SR.png', 'Frame1SR.png', 'Frame1SR.png', 'Frame1SR.png', 'Frame1SR.png', 'Frame1SR.png',
@@ -71,11 +72,18 @@ def ground_line():
 
 
 def render_box():
-    for coordinate in world.box_position:
+    for (coordinate) in world.box_position:
+        # assert isinstance(screen)
+        screen.blit(imageCache.get_image(imagesBox[0]),
+                    (coordinate[0], coordinate[1] + 60 - imageCache.get_image(imagesBox[0]).get_height()))
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1]), 4)
+        world.surface_altitudes.append(((coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1])))
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60), 4)
+        world.surface_altitudes.append(((coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60)))
         pygame.draw.line(screen, 0, (coordinate[0], coordinate[1]), (coordinate[0], coordinate[1] + 60), 4)
+        world.surface_altitudes.append(((coordinate[0], coordinate[1]), (coordinate[0], coordinate[1] + 60)))
         pygame.draw.line(screen, 0, (coordinate[0] + 60, coordinate[1]), (coordinate[0] + 60, coordinate[1] + 60), 4)
+        world.surface_altitudes.append(((coordinate[0] + 60, coordinate[1]), (coordinate[0] + 60, coordinate[1] + 60)))
 
 
 def render_hero(image):
