@@ -15,7 +15,7 @@ done = False
 world = World(surface_altitudes=[
     ((0, 420), (800, 420)), ((800, 600), (900, 600)), ((900, 420), (1920, 420)), ((900, 420), (900, 500)),
     ((900, 500), (1920, 500)), ((800, 420), (800, 500)), ((0, 500), (800, 500))],
-    bounce=0.2, box_position=[[400, 300], [800, 300]])
+    bounce=0.2, box_position=[[400, 300], [800, 300], [1800, 600]])
 hero = Hero(world=world, x=960, y=0, speed=7, velocity=HOR_SPEED)
 
 imagesBox = ['SomeBox.png']

@@ -20,7 +20,7 @@ class Hero:
 
     def climb_up(self):
         if self.on_stairs():
-            self.y -= 5
+            self.y -= 50
 
     def on_stairs(self):
         if 500 <= self.x <= 556:
