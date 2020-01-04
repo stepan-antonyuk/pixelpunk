@@ -19,7 +19,7 @@ class World:
 
     def render_box(self):
         for (coordinate) in self.box_position:
-            Screen.screen.blit(self.imageCache.get_image(Images.imagesBox[0]), (coordinate[0], coordinate[1] + 60 - self.imageCache.get_image(Images.imagesBox[0]).get_height()))
+            Screen.screen.blit(self.imageCache.get_image(images.imagesBox[0]), (coordinate[0], coordinate[1] + 60 - self.imageCache.get_image(images.imagesBox[0]).get_height()))
             pygame.draw.line(Screen.screen, 0, (coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1]), 4)
             self.surface_altitudes.append(((coordinate[0], coordinate[1]), (coordinate[0] + 60, coordinate[1])))
             pygame.draw.line(Screen.screen, 0, (coordinate[0], coordinate[1] + 60), (coordinate[0] + 60, coordinate[1] + 60),4)

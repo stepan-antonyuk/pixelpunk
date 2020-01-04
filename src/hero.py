@@ -15,7 +15,7 @@ class Hero:
         self.height = 192
         self.width = 56
         self.xxx = 0
-        self.images = Images()
+        self.images = images()
         self.imageCache = ImageCache()
 
     def render_hero(self, image):
@@ -23,15 +23,14 @@ class Hero:
         Screen.screen.blit(image, (x, y - image.get_height()))
 
     def render_hero_staying(self):
-        global counterSR, counterSL
-        images = self.images
+        image = self.images
         imageCache = self.imageCache
-        if Images.looksLeft:
-            self.render_hero(imageCache.get_image(images.imagesSR[images.counterSR]))
-            Images.counterSR = (Images.counterSR + 1) % len(Images.imagesSR)
+        if image.looksLeft:
+            self.render_hero(imageCache.get_image(image.imagesSR[image.counterSR]))
+            image.counterSR = (image.counterSR + 1) % len(image.imagesSR)
         else:
-            self.render_hero(imageCache.get_image(images.imagesSL[images.counterSL]))
-            Images.counterSL = (Images.counterSL + 1) % len(Images.imagesSL)
+            self.render_hero(imageCache.get_image(image.imagesSL[image.counterSL]))
+            image.counterSL = (image.counterSL + 1) % len(image.imagesSL)
 
     def move(self, direction):
         self.x += self.speed * direction

@@ -1,4 +1,5 @@
-class Images:
+
+class images:
     imagesFloor = ['floor.png']
     imagesBox = ['SomeBox.png']
     imagesL = ['Detective-main-left.png']
