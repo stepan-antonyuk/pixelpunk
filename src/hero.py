@@ -12,8 +12,8 @@ class Hero:
         self.speed = speed
         self.max_velocity = velocity
         self.velocity = 0
-        self.height = 192
-        self.width = 56
+        self.height = 160
+        self.width = 128
         self.xxx = 0
         self.images = images()
         self.imageCache = ImageCache()
@@ -56,7 +56,7 @@ class Hero:
 
     def _is_falling(self):
         for ((x1, y1), (x2, _)) in self.world.surface_altitudes:
-            if (x1 <= self.x <= x2) or (x1 <= (self.x + self.width) <= x2):
+            if (self.x <= x2) and (x1 <= (self.x + self.width)):
                 if y1 == self.y:
                     self.velocity = min(self.velocity, 0)
                     return False
@@ -85,7 +85,7 @@ class Hero:
                 elif direction == 1:
                     if ((self.x + self.width) + 7) >= x1 >= (self.x + self.width):
                         if y1 > y2:
-                            if ((self.y - 192) < y1) and (self.y > y2):
+                            if ((self.y - self.height) < y1) and (self.y > y2):
                                 self.speed = x1 - (self.x + self.width) - 1
                                 self.move(direction)
                                 self.speed = 7

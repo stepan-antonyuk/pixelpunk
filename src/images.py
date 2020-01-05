@@ -2,8 +2,8 @@
 class images:
     imagesFloor = ['floor.png']
     imagesBox = ['SomeBox.png']
-    imagesL = ['Detective-main-left.png']
-    imagesR = ['Detective-main-right.png']
+    imagesL = ['Soldier_1L.png']
+    imagesR = ['Soldier_1R.png']
     imagesSR = ['Soldier_1R.png', 'Soldier_1R.png', 'Soldier_1R.png', 'Soldier_1R.png', 'Soldier_1R.png',
                 'Soldier_1R.png',
                 'Soldier_2R.png', 'Soldier_2R.png', 'Soldier_2R.png', 'Soldier_2R.png', 'Soldier_2R.png',
