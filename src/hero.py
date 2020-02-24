@@ -5,13 +5,14 @@ from images import *
 
 class Hero:
 
-    def __init__(self, world, x, y, speed=0, velocity=0):
+    def __init__(self, world, x, y, speed=0, velocity=0, ClimbSpeed=0):
         self.world = world
         self.x = x
         self.y = y
         self.speed = speed
         self.max_velocity = velocity
         self.velocity = 0
+        self.ClimbSpeed = ClimbSpeed
         self.height = 160
         self.width = 128
         self.xxx = 0
@@ -36,33 +37,46 @@ class Hero:
         self.x += self.speed * direction
 
     def climb_down(self):
-        if self.on_stairs():
-            self.y += 5
+        if self.on_stairs:
+            for ((x1, y1), (x2, _)) in self.world.surface_altitudes:
+                if self.y < y1 < self.y + self.velocity:
+                    self.ClimbSpeed = y1 - self.y
+                    self.y += self.ClimbSpeed
 
     def climb_up(self):
-        if self.on_stairs():
-            self.y -= 50
+        if self.on_stairs:
+            self.y -= 5
 
     def on_stairs(self):
-        if 500 <= self.x <= 556:
-            return True
-        else:
-            return False
+        for (coordinateB) in self.world.stairPosX:
+            if (self.x <= coordinateB[1]) and (coordinateB[0] <= (self.x + self.width)):
+                return True
+            else:
+                return False
 
     def jump(self):
-        if not self._is_falling() and not self.on_stairs():
+        if not self._is_falling and not self.on_stairs:
             self.velocity = -30
             self.y += self.velocity
 
     def _is_falling(self):
         for ((x1, y1), (x2, _)) in self.world.surface_altitudes:
-            if (self.x <= x2) and (x1 <= (self.x + self.width)):
-                if y1 == self.y:
-                    self.velocity = min(self.velocity, 0)
-                    return False
-                if self.y < y1 < self.y + self.velocity:
-                    self.velocity = y1 - self.y
-                    return True
+            if x1 > x2:
+                if (self.x <= x2) and (x1 <= (self.x + self.width)):
+                    if y1 == self.y:
+                        self.velocity = min(self.velocity, 0)
+                        return False
+                    if self.y < y1 < self.y + self.velocity:
+                        self.velocity = y1 - self.y
+                        return True
+            else:
+                if (self.x <= x1) and (x2 <= (self.x + self.width)):
+                    if y1 == self.y:
+                        self.velocity = min(self.velocity, 0)
+                        return False
+                    if self.y < y1 < self.y + self.velocity:
+                        self.velocity = y1 - self.y
+                        return True
         return True
 
     def is_wall(self, direction):
@@ -99,7 +113,7 @@ class Hero:
         return False
 
     def gravity(self):
-        if self._is_falling():
+        if self._is_falling:
             self.y += self.velocity
             self.velocity += 4
 

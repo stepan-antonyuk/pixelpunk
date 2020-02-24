@@ -8,10 +8,11 @@ class World:
     RIGHT = 1
     imageCache = ImageCache()
 
-    def __init__(self, surface_altitudes, bounce, box_position):
+    def __init__(self, surface_altitudes, bounce, box_position, stairPosX):
         self.surface_altitudes = surface_altitudes
         self.bounce = bounce
         self.box_position = box_position
+        self.stairPosX = stairPosX
 
     def ground_line(self):
         for coordinate in self.surface_altitudes:

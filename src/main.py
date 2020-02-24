@@ -1,8 +1,7 @@
 from hero import *
 from world import *
 from imagecache import *
-
-stairPosX = [[0, 1920]]
+from screen import *
 
 color = (0, 128, 255)
 FPS = 60
@@ -14,8 +13,8 @@ done = False
 world = World(surface_altitudes=[
     ((0, 420), (800, 420)), ((800, 600), (880, 600)), ((900, 420), (2100, 420)), ((900, 420), (900, 500)),
     ((900, 500), (1920, 500)), ((800, 420), (800, 500)), ((0, 500), (800, 500))],
-    bounce=0.2, box_position=[[400, 300], [800, 300], [1800, 600]])
-hero = Hero(world=world, x=960, y=0, speed=7, velocity=HOR_SPEED)
+    bounce=0.2, box_position=[[400, 300], [800, 300], [1800, 600]], stairPosX=[[500, 550]])
+hero = Hero(world=world, x=960, y=0, speed=7, velocity=HOR_SPEED, ClimbSpeed=5)
 
 GroundLine = world.surface_altitudes
 
@@ -55,7 +54,7 @@ while not done:
                 hero.render_hero(imageCache.get_image('LayL.png'))
     if pressed[pygame.K_DOWN] and not is_pressedCtrl:
         is_pressed = True
-        if hero.on_stairs():
+        if hero.on_stairs:
             hero.climb_down()
             hero.render_hero(imageCache.get_image(images.imagesCC[images.counterCC]))
             images.counterCC = (images.counterCC + 1) % len(images.imagesCC)
@@ -81,7 +80,7 @@ while not done:
         images.counterL = 0
     if pressed[pygame.K_UP] and not is_pressedCtrl:
         is_pressed = True
-        if hero.on_stairs():
+        if hero.on_stairs:
             hero.climb_up()
             hero.render_hero(imageCache.get_image(images.imagesCC[images.counterCC]))
             counterCC = (images.counterCC + 1) % len(images.imagesCC)
