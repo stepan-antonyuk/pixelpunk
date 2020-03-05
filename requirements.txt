@@ -1,2 +1,2 @@
-certifi==2019.6.16
+certifi==2019.11.28
 pygame==1.9.6
