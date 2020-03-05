@@ -54,7 +54,7 @@ while not done:
                 hero.render_hero(imageCache.get_image('LayL.png'))
     if pressed[pygame.K_DOWN] and not is_pressedCtrl:
         is_pressed = True
-        if hero.on_stairs:
+        if hero.on_stairs():
             hero.climb_down()
             hero.render_hero(imageCache.get_image(images.imagesCC[images.counterCC]))
             images.counterCC = (images.counterCC + 1) % len(images.imagesCC)
@@ -80,7 +80,7 @@ while not done:
         images.counterL = 0
     if pressed[pygame.K_UP] and not is_pressedCtrl:
         is_pressed = True
-        if hero.on_stairs:
+        if hero.on_stairs():
             hero.climb_up()
             hero.render_hero(imageCache.get_image(images.imagesCC[images.counterCC]))
             counterCC = (images.counterCC + 1) % len(images.imagesCC)
