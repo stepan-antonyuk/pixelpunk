@@ -1,7 +1,9 @@
-from hero import *
-from world import *
-from imagecache import *
-from screen import *
+import pygame
+
+from hero import Hero
+from world import World
+from imagecache import ImageCache
+from images import images
 
 color = (0, 128, 255)
 FPS = 60

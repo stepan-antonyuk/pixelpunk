@@ -1,6 +1,8 @@
-from screen import *
-from imagecache import *
-from images import *
+import pygame
+
+from screen import Screen
+from imagecache import ImageCache
+from images import images
 
 
 class World:
